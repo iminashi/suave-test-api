@@ -8,18 +8,13 @@ open Suave.Operators
 open Suave.Successful
 
 module Json =
-    let fromObj a =
-        task {
-            use mem = new MemoryStream()
-            do! JsonSerializer.SerializeAsync(mem, a)
-            return mem.ToArray()
-       }
+    let fromObj a = JsonSerializer.SerializeToUtf8Bytes(a)
 
 let getAll : WebPart =
     fun ctx ->
         async {
             let! data = Db.getAll ()
-            let! json = Json.fromObj data
+            let json = Json.fromObj data
             return! ok json ctx
         }
 
