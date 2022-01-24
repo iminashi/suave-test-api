@@ -1,6 +1,5 @@
 ﻿module Program
 
-open System.IO
 open System.Text.Json
 open Suave
 open Suave.Filters
